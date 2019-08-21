@@ -1,0 +1,4 @@
+build/
+conf/
+test/
+*.js

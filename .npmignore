@@ -1,0 +1,6 @@
+build/
+conf/
+src/demo/
+test/
+.vscode/
+npm-shrinkwrap.json
