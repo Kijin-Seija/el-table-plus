@@ -1,11 +1,5 @@
-<template lang="pug">
-  div
-    h2 基础表格
-    BorderTable
-
-    
-
-
+<template>
+  <BorderTable />
 </template>
 
 <script>

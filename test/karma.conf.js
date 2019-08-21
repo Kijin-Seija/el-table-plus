@@ -23,7 +23,7 @@ module.exports = function (config) {
     },
 		webpack: testConfig,
     webpackMiddleware: {
-      stats: 'errors-only',
+      // stats: 'errors-only',
       noInfo: false,
     },
 		// test results reporter to use
@@ -40,7 +40,7 @@ module.exports = function (config) {
 		colors: true,
 		// level of logging
 		// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-		logLevel: config.LOG_ERROR,
+		logLevel: config.LOG_INFO,
 		// enable / disable watching file and executing tests whenever any file changes
 		autoWatch: true,
 		// start these browsers
@@ -48,7 +48,7 @@ module.exports = function (config) {
 		browsers: ['Chrome'],
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits
-		singleRun: false,
+		singleRun: true,
 		// Concurrency level
 		// how many browser should be started simultaneous
     concurrency: Infinity,
