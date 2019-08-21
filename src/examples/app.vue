@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     h2 基础表格
-    BaseTable
+    BorderTable
 
     
 
@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import BaseTable from './BaseTable';
+import BorderTable from './BorderTable';
 
 export default {
   components: {
-    BaseTable
+    BorderTable
   }
 };
 </script>

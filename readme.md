@@ -1,8 +1,11 @@
 ## 通用表格组件
 
 #### 0. 更新日志
-- v0.3.0 (2019-08-12)
+- v0.3.1 (2019-08-12)
   - 使用新的模板承载项目
+
+- v0.3.0 (2019-08-19)
+ - 现在支持npm引入。 ```npm install element-table-plus```
 
 - v0.2.1 (2019-07-30)
   - 当```component```属性中传入渲染函数时，为了获取scope数据，需要通过```scope => h => h(...)```的格式，原格式不再使用。
@@ -18,7 +21,12 @@
 
 - 使用
 
-  将```CommonTable.vue```和```CommonTableColumn```拷贝到你需要的地方即可
+  ```npm install element-table-plus```
+  
+  ```javascript
+  import ElementTablePlus from 'element-table-plus'
+  Vue.use(ElementTablePlus)
+  ```
 
 - 本地调试
   

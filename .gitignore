@@ -7,4 +7,4 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json*
 coverage/
-.cache/
+.cache
