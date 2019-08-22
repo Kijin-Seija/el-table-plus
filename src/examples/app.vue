@@ -1,13 +1,13 @@
 <template>
-  <BorderTable />
+  <BaseTable />
 </template>
 
 <script>
-import BorderTable from './BorderTable';
+import BaseTable from './BaseTable';
 
 export default {
   components: {
-    BorderTable
+    BaseTable
   }
 };
 </script>

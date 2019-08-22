@@ -3252,6 +3252,19 @@
       "integrity": "sha1-Yy+/El/KTWnXoUCmb+mFcvZ8B3g=",
       "dev": true
     },
+    "element-ui": {
+      "version": "2.11.1",
+      "resolved": "http://npm.tdahai.com/element-ui/-/element-ui-2.11.1.tgz",
+      "integrity": "sha1-K2f57uPtouaISHPBxYnL4w2anWA=",
+      "requires": {
+        "async-validator": "~1.8.1",
+        "babel-helper-vue-jsx-merge-props": "^2.0.0",
+        "deepmerge": "^1.2.0",
+        "normalize-wheel": "^1.0.1",
+        "resize-observer-polyfill": "^1.5.0",
+        "throttle-debounce": "^1.0.1"
+      }
+    },
     "elliptic": {
       "version": "6.5.0",
       "resolved": "http://npm.tdahai.com/elliptic/-/elliptic-6.5.0.tgz",
@@ -10335,8 +10348,8 @@
     },
     "vue": {
       "version": "2.6.10",
-      "resolved": "https://registry.npmjs.org/vue/-/vue-2.6.10.tgz",
-      "integrity": "sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ=="
+      "resolved": "http://npm.tdahai.com/vue/-/vue-2.6.10.tgz",
+      "integrity": "sha1-pysaQqTYKnIepDjRtr9V5mGVxjc="
     },
     "vue-eslint-parser": {
       "version": "5.0.0",
