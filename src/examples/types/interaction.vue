@@ -1,12 +1,16 @@
 <template>
-  <span class="table-item-interaction">
-    <el-button
-      type="text"
-      @click="doAction"
-    >
-      {{ value }}
-    </el-button>
-  </span>
+  <dh-authority-item
+    :show-condition="field.showCondition"
+    :authority-code="field.authorityCode"
+  >
+    <span class="table-item-interaction">
+      <DhInteraction
+        v-bind="interactionProps"
+        @showDialog="handleShowDialog"
+        @showDocker="handleShowDocker"
+      />
+    </span>
+  </dh-authority-item>
 </template>
 
 <script>
@@ -22,25 +26,28 @@ export default {
       default() {
         return {};
       }
+    },
+    row: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
+  computed: {
+    interactionProps() {
+      return {
+        ...this.field,
+        entityIds: this.row.entityIds
+      };
     }
   },
   methods: {
-    doAction() {
-      switch (this.field.mode) {
-      case 'page':
-        this.$route.goToPage(this.field.uri);
-        break;
-      case 'ajax':
-        // TODO
-        break;
-      case 'dialog':
-        // TODO
-        break;
-      case 'docker':
-        // TODO
-        break;
-      default: break;
-      }
+    handleShowDialog() {
+      this.$emit('showDialog', {value: this.value, row: this.row, field: this.field});
+    },
+    handleShowDocker() {
+      this.$emit('showDocker', {value: this.value, row: this.row, field: this.field});
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <MyTable
+  <CommonTable
     :class="{'has-selection': selection}"
     :table-attrs="tableAttrsMerged"
     :table-events="tableEventsMerged"
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import MyTable from '../CommonTable';
+import {mockData, mockColumns} from './mockData';
 import EnumText from './types/enum_text';
 import EnumIcon from './types/enum_icon';
 import Timespan from './types/timespan';
@@ -35,18 +35,12 @@ const SELECTION_WIDTH = '25';
 
 
 export default {
-  components: {
-    MyTable
-  },
+  name: 'DhTable',
   props: {
     tableData: {
       type: Array,
       default() {
-        return [
-          {id: 1, enum: 1, duration: Date.now(), date: Date.now(), name: '张三'},
-          {id: 2, enum: 2, duration: Date.now(), date: Date.now(), name: '李四'},
-          {id: 3, enum: 3, duration: Date.now(), date: Date.now(), name: '王五'},
-        ];
+        return mockData;
       }
     },
     tableEvents: {
@@ -80,80 +74,7 @@ export default {
     columns: {
       type: Array,
       default() {
-        return [
-          {
-            // 表格列绑定单个字段
-            label: '编号',
-            tip: '编号aaaaaa',
-            field: {
-              keyName: 'id',
-              type: 'raw',
-              sortable: true,
-              authorityCode: '',
-              showCondition: true
-            }
-          },
-          {
-            label: '枚举',
-            tips: '',
-            field: {
-              name: 'enum',
-              type: 'enum_text',
-              sortable: true,
-              authorityCode: '',
-              showCondition: true,
-              enumsId: 'enum1'
-            }
-          },
-          {
-            label: '时间段',
-            tip: '312312',
-            field: {
-              keyName: 'duration',
-              type: 'timespan',
-              sortable: true,
-              authorityCode: '',
-              showCondition: true
-            }
-          },
-          {
-            label: '时间点',
-            tips: '',
-            field: {
-              keyName: 'date',
-              type: 'datetime',
-              sortable: true,
-              authorityCode: '',
-              showCondition: true,
-              fromFormat: 'Millis',
-              toFormat: 'yyyy-MM-dd'
-            }
-          },
-          {
-            // 表格列绑定多个字段，会渲染成 '组合信息：{name} - {span}分钟'
-            label: 'compose info',
-            tips: '',
-            fields: [
-              '组合信息：',
-              {
-                keyName: 'name',
-                type: 'raw',
-                sortable: true,
-                authorityCode: '',
-                showCondition: true
-              },
-              ' - ',
-              {
-                keyName: 'duration',
-                type: 'timespan',
-                sortable: true,
-                authorityCode: '',
-                showCondition: true,
-                format: 'm分'
-              }
-            ]
-          }
-        ];
+        return mockColumns;
       }
     }
   },
@@ -165,11 +86,7 @@ export default {
         border: true,
         loading: false,
         maxHeight: '400px',
-        data: [
-          {id: 1, enum: 1, duration: Date.now(), date: Date.now(), name: '张三'},
-          {id: 2, enum: 2, duration: Date.now(), date: Date.now(), name: '李四'},
-          {id: 3, enum: 3, duration: Date.now(), date: Date.now(), name: '王五'},
-        ]
+        data: []
       },
       paginationAttrs: {
         layout: 'total, prev, pager, next, jumper',
@@ -180,7 +97,6 @@ export default {
       paginationEventsLocal: {
         'size-change'() {
           this.paginationAttrs.currentPage = 1;
-          console.log(this.paginationAttrs.currentPage);
         }
       }
     };
@@ -245,7 +161,7 @@ export default {
     columnsFormatted() {
       return [
         ...(this.selection ? [{type: 'selection', width: SELECTION_WIDTH}] : []),
-        ...this.columns.map(this.makeCol).filter(item => item)
+        ...this.columns.map(this.makeCol)
       ];
     },
   },
@@ -254,64 +170,51 @@ export default {
       let result = {};
       result.label = column.label;
       result.showOverflowTooltip = true;
-      // tooltip
-      // if (column.tip) {
-      //   if (typeof column.tip === 'string') result.tooltip = column.tip;
-      //   else if (column.tip instanceof Object) result.tooltip = { ...this.makeField(column.tip) };
-      // } else if (column.tips) {
-      //   result.tooltip = {...this.makeFields(column.tips)};
-      // }
-      // result.showOverflowTooltip = true;
-
-      if (column.field) {
-        let field = this.makeField(column.field);
-        if (field) result = { ...result, ...field };
-        else result = null;
-      } else if (column.fields) {
-        let fields = this.makeFields(column.fields);
-        if (fields) result = { ...result, ...fields };
-        else result = null;
-      } else {
-        result = null;
-      }
+      if (column.field) result = { ...result, ...this.makeField(column.field) };
+      else if (column.fields) result = { ...result, ...this.makeFields(column.fields) };
       return result;
     },
 
     makeField(field) {
       let result = {};
-      if (field.showCondition) {
-        result.sortable = field.sortable ? 'custom' : false;
-        if (field.type === 'raw') result.prop = field.keyName;
-        else {
-          result.component = scope => h => h(Fields[field.type], {
-            props: {
-              value: scope.row[field.keyName],
-              field: {...field}
-            }
-          });
-        }
-        return result;
-      } else return null;
+      result.sortable = field.sortable ? 'custom' : false;
+      if (field.type === 'raw') result.prop = field.keyName;
+      else {
+        result.component = scope => h => this.render(h, scope, field);
+      }
+      return result;
     },
 
     makeFields(fields) {
       let result = {};
-      if (fields.some(field => field.showCondition)) {
-        result.sortable = fields.some(field => field.sortable) ? 'custom' : false;
-        result.component = scope => h => h('div', {}, [
-          ...fields.filter(field => typeof field === 'string' || field.showCondition).map(field => {
-            if (typeof field === 'string') return field;
-            else if (field.type === 'raw') return scope.row[field.keyName];
-            else return h(Fields[field.type], {
-              props: {
-                value: scope.row[field.keyName],
-                field: {...field}
-              }
-            });
-          })
-        ]);
-        return result;
-      } else return null;
+      result.sortable = fields.some(field => field.sortable) ? 'custom' : false;
+      result.component = scope => h => h('div', {}, [
+        ...fields.map(field => {
+          if (typeof field === 'string') return field;
+          else if (field.type === 'raw') return scope.row[field.keyName];
+          else return this.render(h, scope, field);
+        })
+      ]);
+      return result;
+    },
+
+    render(h, scope, field) {
+      return h(Fields[field.type], {
+        props: {
+          value: scope.row[field.keyName],
+          field: {...field},
+          row: {...scope.row},
+          on: {
+            // interaction
+            showDialog(event) {
+              this.$emit('showDialog', {...event});
+            },
+            ShowDocker(event) {
+              this.$emit('showDocker', {...event});
+            }
+          }
+        }
+      });
     }
   }
 };
