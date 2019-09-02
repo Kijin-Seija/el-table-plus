@@ -1,7 +1,7 @@
 {
   "name": "dh-component-vue-common-table",
-  "version": "0.4.1",
-  "description": "基于dh-elementui表格+分页器的扩展组件",
+  "version": "0.4.4",
+  "description": "基于elementui表格+分页器的扩展组件",
   "main": "dist/common-table.min.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production node build/prod.js",
@@ -60,7 +60,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.5.5",
-    "dh-element-ui": "^2.5.26",
     "dh-module-type": "^0.1.1",
     "element-ui": "^2.11.1",
     "luxon": "^1.17.2",

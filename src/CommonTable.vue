@@ -158,8 +158,10 @@ export default {
     fixThis(obj) {
       let result = {};
       Object.keys(obj).forEach((key) => {
-        if (obj[key] instanceof Function && !key.includes('NOFIXTHIS_')) result[key] = obj[key].bind(this.$parent);
-        else if (obj[key] instanceof Array) result[key] = obj[key].map(this.fixThis);
+        if (obj[key] instanceof Function){
+          if (key.includes('NOFIXTHIS_')) result[key.substring(key.indexOf('_') + 1)] = obj[key];
+          else result[key] = obj[key].bind(this.$parent);
+        } else if (obj[key] instanceof Array) result[key] = obj[key].map(this.fixThis);
         else if (obj[key] instanceof Object) result[key] = this.fixThis(obj[key]);
         else result[key] = obj[key];
       });

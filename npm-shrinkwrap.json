@@ -1,6 +1,6 @@
 {
   "name": "dh-component-vue-common-table",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -3081,19 +3081,6 @@
       "requires": {
         "inherits": "^2.0.1",
         "minimalistic-assert": "^1.0.0"
-      }
-    },
-    "dh-element-ui": {
-      "version": "2.5.26",
-      "resolved": "https://registry.npmjs.org/dh-element-ui/-/dh-element-ui-2.5.26.tgz",
-      "integrity": "sha512-J4clAz3aSOnauITAK6ze8sqzz9KloewNY7YY86Euzghg8auy18BTTfje2Fo/locGq8lPgU3nPe6q229X43fJkA==",
-      "requires": {
-        "async-validator": "~1.8.1",
-        "babel-helper-vue-jsx-merge-props": "^2.0.0",
-        "deepmerge": "^1.2.0",
-        "normalize-wheel": "^1.0.1",
-        "resize-observer-polyfill": "^1.5.0",
-        "throttle-debounce": "^1.0.1"
       }
     },
     "dh-module-type": {
