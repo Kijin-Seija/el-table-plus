@@ -2,8 +2,6 @@ import CommonTable from './CommonTable';
 
 export default {
   install(Vue) {
-    Vue.mixin({
-      components: { CommonTable }
-    });
+    Vue.component('CommonTable', CommonTable)
   }
 };

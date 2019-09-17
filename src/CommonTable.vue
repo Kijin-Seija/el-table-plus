@@ -55,6 +55,7 @@
 <script>
 import CommonTableColumn from './CommonTableColumn';
 export default {
+  name: 'CommonTable',
   components: {
     CommonTableColumn
   },
