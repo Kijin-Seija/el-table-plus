@@ -15,20 +15,20 @@
       >
         <!-- 插槽透传 -->
         <template
-          v-if="column.headerSlotName"
-          #[`${column.headerSlotName}-header`]="scope"
+          v-for="headerSlotName in slotList.header"
+          #[`${headerSlotName}-header`]="scope"
         >
           <slot
-            :name="`${column.headerSlotName}-header`"
+            :name="`${headerSlotName}-header`"
             v-bind="scope"
           />
         </template>
         <template
-          v-if="column.slotName"
-          #[column.slotName]="scope"
+          v-for="slotName in slotList.default"
+          #[slotName]="scope"
         >
           <slot
-            :name="column.slotName"
+            :name="slotName"
             v-bind="scope"
           />
         </template>
@@ -54,6 +54,7 @@
 
 <script>
 import CommonTableColumn from './CommonTableColumn';
+import tree from './lib/tree';
 export default {
   name: 'CommonTable',
   components: {
@@ -152,10 +153,18 @@ export default {
     },
     paginationEventsThisFixed() {
       return this.fixThis(this.paginationEvents);
+    },
+    slotList() {
+      return {
+        default: tree(this.columns || []).flatten().filter(item => item.src.slotName).map(item => item.src.slotName),
+        header: tree(this.columns || []).flatten().filter(item => item.src.headerSlotName).map(item => item.src.headerSlotName)
+      };
     }
   },
   methods: {
     // 将传入值为函数的属性的this绑定到父组件
+    // 默认绑定在CommonTable组件上
+    // 如果这个绑定不符合您当前的需求，可以自行在外层bind，然后在传入的函数名前添加 NOFIXTHIS_ 前缀，这样组件不会再自动修复绑定
     fixThis(obj) {
       let result = {};
       Object.keys(obj).forEach((key) => {
