@@ -156,8 +156,8 @@ export default {
     },
     slotList() {
       return {
-        default: tree(this.columns || []).flatten().filter(item => item.src.slotName).map(item => item.src.slotName),
-        header: tree(this.columns || []).flatten().filter(item => item.src.headerSlotName).map(item => item.src.headerSlotName)
+        default: tree(this.columns).flatten().filter(item => item.src.slotName).map(item => item.src.slotName),
+        header: tree(this.columns).flatten().filter(item => item.src.headerSlotName).map(item => item.src.headerSlotName)
       };
     }
   },
@@ -166,6 +166,7 @@ export default {
     // 默认绑定在CommonTable组件上
     // 如果这个绑定不符合您当前的需求，可以自行在外层bind，然后在传入的函数名前添加 NOFIXTHIS_ 前缀，这样组件不会再自动修复绑定
     fixThis(obj) {
+      if (!(obj instanceof Object)) return obj;
       let result = {};
       Object.keys(obj).forEach((key) => {
         if (obj[key] instanceof Function){

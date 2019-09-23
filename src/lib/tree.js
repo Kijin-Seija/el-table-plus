@@ -41,7 +41,6 @@ function flattenRecursive(arr, childrenKey) {
     flattenList.push(item);
     if (item[childrenKey]) flattenRecursive(item[childrenKey], childrenKey);
   }
-  console.log('2222222', flattenList);
 }
 
 /**

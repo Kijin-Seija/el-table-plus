@@ -2,7 +2,7 @@
   <MyTable
     :table-attrs="tableAttrs"
     :columns="columns"
-    disable-pagination
+    :pagination-attrs="pagination"
   />
 </template>
 
@@ -41,7 +41,10 @@ export default {
         { label: '日期', prop: 'date', width: 180 },
         { label: '姓名', prop: 'name', width: 180 },
         { label: '地址', prop: 'address' }
-      ]
+      ],
+      pagination: {
+        total: 40
+      }
     };
   }
 };
