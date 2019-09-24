@@ -3092,14 +3092,6 @@
         "minimalistic-assert": "^1.0.0"
       }
     },
-    "dh-module-type": {
-      "version": "0.1.1",
-      "resolved": "http://npm.tdahai.com/dh-module-type/-/dh-module-type-0.1.1.tgz",
-      "integrity": "sha512-YuAXHSzEuGEKzlIGxW4Ba27calMTUNT5v87tdp2rVvnqrWAWi9y0dPKznzbz88uFJF5Eqx7cDUzAJL6T1XsSEw==",
-      "requires": {
-        "@babel/runtime-corejs3": "^7.5.5"
-      }
-    },
     "di": {
       "version": "0.0.1",
       "resolved": "http://npm.tdahai.com/di/-/di-0.0.1.tgz",
@@ -3608,12 +3600,6 @@
           "dev": true
         }
       }
-    },
-    "eslint-config-dahai": {
-      "version": "0.1.3",
-      "resolved": "http://npm.tdahai.com/eslint-config-dahai/-/eslint-config-dahai-0.1.3.tgz",
-      "integrity": "sha512-pPLsfIn7ny/94ufbKPe3odGG7ZQyZ4tsN7lE42Q2UnYJt0ugLgNvOGtx8bMc3DlpuptWZ6h7TDLBCiLoHG+ZmQ==",
-      "dev": true
     },
     "eslint-friendly-formatter": {
       "version": "4.0.1",
