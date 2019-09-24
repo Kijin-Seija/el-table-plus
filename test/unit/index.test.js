@@ -87,7 +87,7 @@ describe('table 初始化', () => {
     expect(wrapper.vm.table.$el).to.be.exist
   })
 
-  const column = mount(CommonTableColumn)
+  const column = shallowMount(CommonTableColumn, {localVue})
   it('table column prop默认值 column', () => {
     expect(column.vm.column).to.eql({})
   })
@@ -434,6 +434,93 @@ describe('table 插槽', () => {
 
   it('表格与分页器间插槽', () => {
     expect(wrapper.find('.slot-middle').exists()).to.be.true
+  }),
+
+  it('table column slot初始化正确', () => {
+    wrapper.findAll(CommonTableColumn).wrappers.forEach(item => {
+      expect(item.vm.childrenSlotList.default).to.be.an('array')
+      expect(item.vm.childrenSlotList.header).to.be.an('array')
+    })
+  })
+})
+
+describe('table 多级嵌套', () => {
+  const wrapper = mount(CommonTable, {
+    localVue,
+    stubs: { transition: false },
+    propsData: {
+      tableAttrs: {
+        data: getTestData()
+      },
+      columns: [
+        { label: '嵌套', children: [
+          ...getTestColumns(),
+          { label: '操作', slotName: 'operation', headerSlotName: 'operation' }
+        ]}
+      ],
+      paginationAttrs: {
+        total: 40
+      },
+      slots: {
+        operation: '<div class="slot-operation">operation</div>',
+        'operation-header': '<div class="slot-operation-header">operation-header</div>'
+      }
+    }
   })
 
+  it('table column slot传递正确', () => {
+    expect(wrapper.find(CommonTableColumn).vm.childrenSlotList).to.eql({default: ['operation'], header: ['operation']})
+  })
+})
+
+describe('table 传入component', () => {
+  const testComp = localVue.component('testComp', localVue.extend({
+    render: h => h('div', {
+      props: { type: 'success' },
+      'class': {testComp: true},
+      domProps: { innerHTML: '自定义' }
+    })
+  }))
+
+  const wrapper = mount(CommonTable, {
+    localVue,
+    stubs: {
+      transition: false
+    },
+    propsData: {
+      tableAttrs: {
+        data: getTestData()
+      },
+      columns: [
+        ...getTestColumns(),
+        {
+          label: '操作',
+          component: scope => h => h('el-button', {
+            props: { type: 'success' },
+            domProps: { innerHTML: scope.row.name },
+            on: { click: () => { console.log(this)} }
+          })
+        },
+        {
+          label: '自定义',
+          component: 'testComp'
+        }
+      ],
+      paginationAttrs: {
+        total: 40
+      }
+    },
+  })
+
+  it('渲染函数模式', () => {
+    let realized = wrapper.findAll(ElementUI.Button).wrappers.map(item => item.text());
+    let expected = getTestData().map(item => item.name);
+    expect(realized).to.eql(expected);
+  })
+
+  it('外部组件模式', () => {
+    let realized = wrapper.findAll('.testComp').wrappers.map(item => item.text());
+    let expected = new Array(5).fill('自定义')
+    expect(realized).to.eql(expected);
+  })
 })
