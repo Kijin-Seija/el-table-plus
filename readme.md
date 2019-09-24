@@ -1,5 +1,7 @@
 ## 通用表格组件
 
+[![Build Status](https://travis-ci.org/Kijin-Seija/el-table-plus.svg?branch=master)](https://travis-ci.org/Kijin-Seija/el-table-plus)
+
 #### 0. 更新日志
 - v0.4.9 (2019-09-24)
   - 完善单元测试代码
