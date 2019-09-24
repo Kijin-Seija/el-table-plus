@@ -11,16 +11,14 @@ module.exports = function (config) {
 		frameworks: ['mocha', 'chai'],
 		// list of files / patterns to load in the browser
 		files: [
-			'unit/**/*.test.js'
+      'unit/**/*.test.js'
 		],
 		// list of files to exclude
-		exclude: [
-      '../src/examples/**/*'
-		],
+		exclude: [],
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
-			'unit/**/*.test.js': ['webpack', 'sourcemap']
+      'unit/**/*.test.js': ['webpack', 'sourcemap']
     },
 		webpack: testConfig,
     webpackMiddleware: {

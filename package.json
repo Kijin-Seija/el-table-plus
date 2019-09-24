@@ -1,6 +1,6 @@
 {
   "name": "dh-component-vue-common-table",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "基于elementui表格+分页器的扩展组件",
   "main": "dist/common-table.min.js",
   "scripts": {
