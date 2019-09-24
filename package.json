@@ -1,5 +1,5 @@
 {
-  "name": "dh-component-vue-common-table",
+  "name": "element-table-plus",
   "version": "0.4.8",
   "description": "基于elementui表格+分页器的扩展组件",
   "main": "dist/common-table.min.js",
@@ -9,7 +9,7 @@
     "karma": "cross-env BABEL_ENV=test karma start ./test/karma.conf.js",
     "prepublishOnly": "npm run build && npm run karma"
   },
-  "author": "wanjie1@100tal.com",
+  "author": "almon123@qq.com",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
@@ -73,5 +73,13 @@
   ],
   "posthtml": {
     "recognizeSelfClosing": true
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kijin-Seija/el-table-plus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kijin-Seija/el-table-plus/issues"
+  },
+  "homepage": "https://github.com/Kijin-Seija/el-table-plus#readme"
 }
