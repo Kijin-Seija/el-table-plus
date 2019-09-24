@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=production node build/prod.js",
     "lint": "eslint --ext .js,.html --fix --format node_modules/eslint-friendly-formatter src test/unit",
     "karma": "cross-env BABEL_ENV=test karma start ./test/karma.conf.js",
-    "prepublishOnly": "npm run build && npm run karma"
+    "prepublishOnly": "npm run build && npm run karma",
+    "test": "npm run build && npm run karma"
   },
   "author": "almon123@qq.com",
   "devDependencies": {
