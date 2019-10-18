@@ -30,8 +30,11 @@ module.exports = function (config) {
 		// available reporters: https://npmjs.org/browse/keyword/karma-reporter
 		reporters: ['mocha', 'coverage'],
 		coverageReporter: {
-			type: 'html',
-			dir: 'coverage/'
+      dir: 'coverage/',
+      reporters: [
+        { type: 'html' },
+        {type: 'lcov', subdir: 'lcov'}
+      ]
 		},
 		// web server port
 		port: 9876,
