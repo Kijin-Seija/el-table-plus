@@ -1,7 +1,6 @@
 ## 通用表格组件
 
 [![Build Status](https://travis-ci.org/Kijin-Seija/el-table-plus.svg?branch=master)](https://travis-ci.org/Kijin-Seija/el-table-plus)
-
 [![Coverage Status](https://coveralls.io/repos/github/Kijin-Seija/el-table-plus/badge.svg?branch=master)](https://coveralls.io/github/Kijin-Seija/el-table-plus?branch=master)
 
 #### 0. 更新日志
