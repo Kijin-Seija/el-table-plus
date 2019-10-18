@@ -1,6 +1,6 @@
 {
   "name": "element-table-plus",
-  "version": "0.4.10",
+  "version": "0.5.0",
   "description": "基于elementui表格+分页器的扩展组件",
   "main": "dist/common-table.min.js",
   "scripts": {
@@ -68,6 +68,7 @@
     "@babel/runtime-corejs3": "^7.5.5",
     "element-ui": "^2.11.1",
     "luxon": "^1.17.2",
+    "tree-shredder": "^0.1.2",
     "vue": "^2.6.10"
   },
   "browserslist": [

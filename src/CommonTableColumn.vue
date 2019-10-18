@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import tree from './lib/tree';
+import tree from 'tree-shredder';
 
 export default {
   name: 'CommonTableColumn',
@@ -78,9 +78,10 @@ export default {
   },
   computed: {
     childrenSlotList() {
+      let childrenTree = tree(this.column).flatten().slice(1);
       return {
-        default: tree(this.column.children || []).flatten().filter(item => item.src.slotName).map(item => item.src.slotName),
-        header: tree(this.column.children || []).flatten().filter(item => item.src.headerSlotName).map(item => item.src.headerSlotName)
+        default: childrenTree.filter(item => item.src().slotName).map(item => item.src().slotName),
+        header: childrenTree.filter(item => item.src().headerSlotName).map(item => item.src().headerSlotName)
       };
     }
   },

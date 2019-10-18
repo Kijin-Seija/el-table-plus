@@ -3,9 +3,14 @@
 [![Build Status](https://travis-ci.org/Kijin-Seija/el-table-plus.svg?branch=master)](https://travis-ci.org/Kijin-Seija/el-table-plus)
 
 #### 0. 更新日志
-- v0.4.10 (2019=10-18)
+- v0.5.0 (2019-10-18)
+  - 使用开发的tree-shredder库代替lib中的tree.js
+
+  > 该版本若不稳定，可使用0.4.x版本
+
+- v0.4.10 (2019-10-18)
   - 添加coveralls
-  
+
 - v0.4.9 (2019-09-24)
   - 完善单元测试代码sub
   
@@ -57,7 +62,7 @@
     >
     > ```npm install```
     >
-    > ```parcel index.html```
+    > ```parcel ./src/examples/index.html```
 
 #### 2. 传入参数
 

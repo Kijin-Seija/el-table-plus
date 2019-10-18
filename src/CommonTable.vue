@@ -54,7 +54,8 @@
 
 <script>
 import CommonTableColumn from './CommonTableColumn';
-import tree from './lib/tree';
+import tree from 'tree-shredder'
+
 export default {
   name: 'CommonTable',
   components: {
@@ -155,10 +156,17 @@ export default {
       return this.fixThis(this.paginationEvents);
     },
     slotList() {
+      let forest = this.columns
+        .map(item => tree(item))
+        .map(item => item.flatten())
+        .reduce((prev, next) => {
+          return prev.concat(next)
+        }, [])
       return {
-        default: tree(this.columns).flatten().filter(item => item.src.slotName).map(item => item.src.slotName),
-        header: tree(this.columns).flatten().filter(item => item.src.headerSlotName).map(item => item.src.headerSlotName)
+        default: forest.filter(item => item.src().slotName).map(item => item.src().slotName),
+        header: forest.filter(item => item.src().headerSlotName).map(item => item.src().headerSlotName)
       };
+      // return forest;
     }
   },
   methods: {
